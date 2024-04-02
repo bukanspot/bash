@@ -1,16 +1,18 @@
-mkdir ~/.sbash
-cp .bashrc ~/.sbash
-cp .bash_aliases ~/.sbash
-cp emoticon.sh ~/.sbash
-cp basha ~/.sbash
-
-if [ -f ~/.bashrc ]; then
-     rm ~/.bashrc
-     echo "source ~/.sbash/.bashrc" > ~/.bashrc
-else
-     echo "source ~/.sbash/.bashrc" > ~/.bashrc
+if [ ! -d ~/.sbash ]; then
+    mkdir ~/.sbash
 fi
 
-touch ~/.sbash/basha/secret.sh
+rsync -av --progress . ~/.sbash/ \
+     --exclude .gitignore \
+     --exclude .git/ \
+     --exclude .github
+
+if [ -f ~/.bashrc ]; then
+     mv ~/.bashrc ~/.bashrc.old
+fi
+
+echo "source ~/.sbash/.bashrc" > ~/.bashrc
+
+touch ~/.sbash/lib/secret.sh
 
 exec bash -l
