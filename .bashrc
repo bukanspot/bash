@@ -1,6 +1,15 @@
-if [ -f ~/.sbash/emoticon ]; then
-    source ~/.sbash/emoticon
-fi
+#!/bin/bash
+
+# Read the settings.cfg file line by line
+while IFS=' =' read -r key value
+do
+  # Remove the spaces from the key and value
+  key=$(echo $key | tr -d ' ')
+  value=$(echo $value | tr -d ' ')
+
+  # Declare a variable with the name of the key and assign the value to it
+  declare "$key=$value"
+done < "settings.cfg"
 
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
