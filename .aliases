@@ -1,8 +1,0 @@
-# Loop over all files in the directory
-for file in ~/.sbash/lib/*
-do
-    # Check if the file is a regular file and source it
-    if [ -f "$file" ]; then
-        source "$file"
-    fi
-done
